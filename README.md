@@ -34,9 +34,28 @@ We have 83782 **rows** in the dataset, and the relevant columns are
 **Note**: this dataframe shows only relevant columns in the cleaned dataframe instead of the whole dataframe
 
 ## Framing the Problem
+1. We cleaned nutrition by separating the list into seven columns: calories (#), total fat (PDV), sugar (PDV), sodium (PDV), protein (PDV), saturated fat (PDV), carbohydrates (PDV)
+2. We plan to perform regression to predict the calories in the recipe
+3. We chose calories as the response variable because it is likely to depend heavily on the amount of each nutrition.
+4. We will use R^2 to evaluate our model.
 
 ## Baseline Model
 
+### choose regression
+We chose the Knn regression
+Because we are unsure if the true relationship is linear. The results will be at worst slightly inferior to linear regression if the true relationship is linear, but it will be substantially better if the true relationship is non-linear
+### choose features
+For our baseline model, we decided to employ two features, sugar (PDV) and carbohydrates (PDV)
+We chose Sugar and carbohydrate because, at first glance, they look like nutrients that can influence Calories on a high level.
+Both are quantitative, and we didn’t perform any transformation in this stage
+After train test split, our mode consistently scores around 0.5 R^2
+Our baseline model is not great and there are definitely lots of room for improvement, but it is not horrible either.
+
+
 ## Final Model
+- It was clear more features were needed for a better model. After some research online, we realized that all nutrients listed are important when it comes to calculating calories, besides Sodium, which has no calories at all. Therefore, we ended up including five features: total fat (PDV), sugar (PDV), protein (PDV), saturated fat (PDV), and carbohydrates (PDV).
+- We noticed that sugar (PDV) and saturated fat (PDV) have particularly large outliers and relatively large IQR. We decided to perform normalization with these two features because we worry that the extreme outliers and variability can influence standardization in a negative way. For the other three features, we employ standardization.
+- We use gridsearchcv to find the best hyperparameter. The best n_neighbor is 2 and the best weight is distance rather than uniform.
+- Our final model consistently scores over 0.9 R^2 in the test dataset, which is a huge improvement over the baseline model’s 0.5 R^2.
 
 ## Fairness Analysis

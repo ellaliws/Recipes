@@ -49,9 +49,9 @@ We noticed that `'sugar (PDV)'` and `'saturated fat (PDV)'` have particularly la
 ---
 
 ## Fairness Analysis
-#### Choice of Groups:
+- Choice of Groups:
 recipes submitted before 2010 and recipes submitted on and after 2010
-- Question: does my model perform differently for recipes submitted before 2010 and recipes submitted on and after 2010?
+- **Question**: does my model perform differently for recipes submitted before 2010 and recipes submitted on and after 2010?
 - Null Hypothesis: Our model is fair. Its performance for recipes submitted before and after 2010 is roughly the same, and any differences are due to random chance.
 - Alternative hypothesis: Our model is unfair, Its performance for recipes submitted before and after 2010 is different.
 

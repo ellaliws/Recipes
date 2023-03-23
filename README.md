@@ -43,26 +43,26 @@ We noticed that `'sugar (PDV)'` and `'saturated fat (PDV)'` have particularly la
   2. By observing the relatively large difference in ranges for these three features, we want to prevent features with wider ranges   from dominating our metric
 - We use gridsearchcv to find the best hyperparameter. The best n_neighbor is 2 and the best weight is distance rather than uniform.
 - Final model description: 
-Our final model use ColumnTransformer descriped above and KNeighborsRegressor with the best combination of hyperparameters
-Our final model consistently scores over 0.9 R^2 in the test dataset, which is a huge improvement over the baseline model’s 0.5 R^2.
+- Our final model use ColumnTransformer descriped above and KNeighborsRegressor with the best combination of hyperparameters
+- Performance: Our final model consistently scores over 0.9 R^2 in the test dataset, which is a huge improvement over the baseline model’s 0.5 R^2.
 
 ---
 
 ## Fairness Analysis
 #### Choice of Groups:
 recipes submitted before 2010 and recipes submitted on and after 2010
-Question: does my model perform differently for recipes submitted before 2010 and recipes submitted on and after 2010?
-Null Hypothesis: Our model is fair. Its performance for recipes submitted before and after 2010 is roughly the same, and any differences are due to random chance.
-Alternative hypothesis: Our model is unfair, Its performance for recipes submitted before and after 2010 is different.
+- Question: does my model perform differently for recipes submitted before 2010 and recipes submitted on and after 2010?
+- Null Hypothesis: Our model is fair. Its performance for recipes submitted before and after 2010 is roughly the same, and any differences are due to random chance.
+- Alternative hypothesis: Our model is unfair, Its performance for recipes submitted before and after 2010 is different.
 
 #### Evaluation Metric
-We decided to use the absolute difference in R^2 as a metric. Since we conduct a two-sided test ( our alternative hypothesis is simply about whether two distributions are different. We use R^2 because we built a regression model. 
+We decided to use the absolute difference in R^2 as a metric. Since we conduct a two-sided test (our alternative hypothesis is simply about whether two distributions are different. We use R^2 because we built a regression model. 
 
 #### Permutation Test
-To see difference in two distributions, we perform a permutation test. We choose a significane level of 0.05.
-To start with, we train test split and train our model with the train data.
-Then we separate the test data into two groups and obtain the observed absolute difference of R^2 between the two groups
+- To see difference in two distributions, we perform a permutation test. We choose a significane level of 0.05.
+- To start with, we train test split and train our model with the train data.
+- Then we separate the test data into two groups and obtain the observed absolute difference of R^2 between the two groups
 We repeatedly shuffle the test data and obtain a list of differences in R^2 between the two groups.
-Calculate the p-value by comparing the list to our observed value.
+- Calculate the **p-value** by comparing the list to our observed value.
 We got a large p-value of 0.5, which is greater than our significance level. We fail to reject the null hypothesis. 
 Hence, we conclude that it seems like our model is fair.

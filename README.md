@@ -65,4 +65,4 @@ We decided to use the absolute difference in R^2 as a metric. Since we conduct a
 We repeatedly shuffle the test data and obtain a list of differences in R^2 between the two groups.
 - Calculate the **p-value** by comparing the list to our observed value.
 We got a large p-value of 0.5, which is greater than our significance level. We fail to reject the null hypothesis. 
-Hence, we conclude that it seems like our model is fair.
+- Hence, we conclude that it seems like our model is fair.

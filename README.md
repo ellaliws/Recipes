@@ -1,5 +1,5 @@
-# Prediction Model Building: Recipes
-A project for DSC 80 at UCSD. Some good advice to pick a good recipe💓
+# Calorie Crystal Ball🔮: predict the calories using model building
+A project for DSC 80 at UCSD. A fair Prediction Model to predict calories of recipes.
 project contributors: Wushuang Li, Zixuan Zhao
 
 ---

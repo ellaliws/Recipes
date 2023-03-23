@@ -1,6 +1,6 @@
 # Calorie Crystal Ball🔮: predict the calories using model building
 A project for DSC 80 at UCSD. A fair Prediction Model to predict calories of recipes.
-project contributors: Wushuang Li, Zixuan Zhao
+##### project contributors: Wushuang Li, Zixuan Zhao
 
 ---
 

@@ -1,27 +1,8 @@
-# Recipes
+# Prediction Model Building: Recipes
 A project for DSC 80 at UCSD. Some good advice to pick a good recipe💓
+project contributors: Wushuang Li, Zixuan Zhao
 
 ---
-## Introduction
-**Analysis Question:** Is there a relationship between the preparing time and average rating of recipes?
-**Why is this important:** By analyzing this dataset, we will identify whether the preparing time and average rating of recipes are related. If there is a relationship, we can help readers filter out the recipes that are more likely to be bad by looking at its preperation time.
-
-
-### Dataset Information
-We have 83782 **rows** in the dataset, and the relevant columns are 
-- `'name'` : Recipe name
-- `'id'`: Recipe ID
-- `'minutes'` : Minutes to prepare recipe as integers
-- `'nutrition'` : Nutrition information in the form [calories (#), total fat (PDV), sugar (PDV), sodium (PDV), protein (PDV), saturated fat (PDV), carbohydrates (PDV)]; PDV stands for “percentage of daily value”
-- `'description'` : User-provided description
-- `'n_ingredients'` : number of ingredients in the recipe
-- `'rating'` : Average Rating of the recipe as floats
-
----
-
-### Data Cleaning
-
-
 
 ## Framing the Problem
 ##### Data Cleaning Steps: 
@@ -29,25 +10,29 @@ We have 83782 **rows** in the dataset, and the relevant columns are
 2.  In the merged dataset, fill all ratings of 0 with np.nan. This is **neccessary** because if a recipe is rated 0, it means a reviewer did not enter the rating. So it can be seen as a column containing missing values.
 3.  Find the average rating of invidividual recipes and add this Series as `'rating'` column to recipes dataframe. We will use the average rating `'rating'` in the analysis part.
 4.  Originally, `'nutrition'` contains nutritions as a list of values. We create individual columns for every unique nutritions.
-### Report
-The major part for use: We cleaned nutrition by separating the list into seven columns: calories (#), total fat (PDV), sugar (PDV), sodium (PDV), protein (PDV), saturated fat (PDV), carbohydrates (PDV)
-We plan to perform regression to predict the calories in the recipe
+
+### Prediction Problem
+We plan to perform **regression** to **predict the calories in the recipe**.
+
 We chose calories as the response variable because it is likely to depend heavily on the amount of each nutrition.
+- From the information we know: We cleaned nutrition by separating the list into seven columns: calories (#), total fat (PDV), sugar (PDV), sodium (PDV), protein (PDV), saturated fat (PDV), carbohydrates (PDV)
+
 We will use R^2 to evaluate our model because we will build a regression model.
 
+---
 
 ## Baseline Model
 
 We build a K-nearest Neighbours Regression model as our baseline model with two quantitative features `sugar (PDV)` and `'carbohydrates (PDV)'` in recipes dataframe
-We chose the  K-nearest Neighbours Regression
+- We chose the  K-nearest Neighbours Regression
 Because we are unsure if the true relationship is linear. The results will be at worst slightly inferior to linear regression if the true relationship is linear, but it will be substantially better if the true relationship is non-linear
-For our baseline model, we decided to employ two features, `'sugar (PDV)'` and `'carbohydrates (PDV)'`
+- For our baseline model, we decided to employ two features, `'sugar (PDV)'` and `'carbohydrates (PDV)'`
 We chose `'sugar (PDV)'` and `'carbohydrates (PDV)'` because, at first glance, they look like nutrients that can influence Calories on a high level.
-Both are quantitative, and we didn’t perform any transformation in this stage
+Both features are quantitative, and we didn’t perform any transformation in this stage
 After train test split, our mode consistently scores around 0.5 R^2
-Our baseline model is not great and there are definitely lots of room for improvement, but it is not horrible either.
+- It is observed that our baseline model lacks complexity and may cause underfit. Based on R^2, our baseline model is not great and there are definitely lots of room for improvement, but it is not horrible either.
 
-
+---
 
 ## Final Model
 - Model description: we used a ColumnTransformer(to Normalize `'sugar (PDV)'` and `'saturated fat (PDV)'`, and to standardize `'carbohydrates (PDV)'`, `'total fat (PDV)'`, `'protein (PDV)'`) and use KNeighborsRegressor
@@ -61,18 +46,19 @@ We noticed that `'sugar (PDV)'` and `'saturated fat (PDV)'` have particularly la
 Our final model use ColumnTransformer descriped above and KNeighborsRegressor with the best combination of hyperparameters
 Our final model consistently scores over 0.9 R^2 in the test dataset, which is a huge improvement over the baseline model’s 0.5 R^2.
 
+---
 
 ## Fairness Analysis
-### Choice of groups:
+#### Choice of groups:
 recipes submitted before 2010 and recipes submitted on and after 2010
 Question: does my model perform differently for recipes submitted before 2010 and recipes submitted on and after 2010?
 Null Hypothesis: Our model is fair. Its performance for recipes submitted before and after 2010 is roughly the same, and any differences are due to random chance.
 Alternative hypothesis: Our model is unfair, Its performance for recipes submitted before and after 2010 is different.
 
-### Evaluation Metric
+#### Evaluation Metric
 We decided to use the absolute difference in R^2 as a metric. Since we conduct a two-sided test ( our alternative hypothesis is simply about whether two distributions are different. We use R^2 because we built a regression model. 
 
-### Permutation Test
+#### Permutation Test
 To see difference in two distributions, we perform a permutation test. We choose a significane level of 0.05.
 To start with, we train test split and train our model with the train data.
 Then we separate the test data into two groups and obtain the observed absolute difference of R^2 between the two groups

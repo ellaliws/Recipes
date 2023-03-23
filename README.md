@@ -35,7 +35,7 @@ After train test split, our mode consistently scores around 0.5 R^2
 ---
 
 ## Final Model
-- Model description: we used a ColumnTransformer(to Normalize `'sugar (PDV)'` and `'saturated fat (PDV)'`, and to standardize `'carbohydrates (PDV)'`, `'total fat (PDV)'`, `'protein (PDV)'`) and use KNeighborsRegressor
+- Model Description: we used a ColumnTransformer(to Normalize `'sugar (PDV)'` and `'saturated fat (PDV)'`, and to standardize `'carbohydrates (PDV)'`, `'total fat (PDV)'`, `'protein (PDV)'`) and use KNeighborsRegressor
 With a low R^2 score for test set, we think our model needs more complexity. It was clear more features were needed for a better model. After some research online, we realized that all nutrients listed are important when it comes to calculating calories, besides Sodium, which has no calories at all. Therefore, we ended up including five features: total fat (PDV), sugar (PDV), protein (PDV), saturated fat (PDV), and carbohydrates (PDV).
 We noticed that `'sugar (PDV)'` and `'saturated fat (PDV)'` have particularly large outliers and relatively large IQR. We decided to perform normalization with these two features because we worry that the extreme outliers and variability can influence standardization in a negative way. 
 - For the other three features, `'carbohydrates (PDV)'`,`'total fat (PDV)'`, `'protein (PDV)'`, we employ standardization. This is because in data generating process: 
@@ -49,7 +49,7 @@ Our final model consistently scores over 0.9 R^2 in the test dataset, which is a
 ---
 
 ## Fairness Analysis
-#### Choice of groups:
+#### Choice of Groups:
 recipes submitted before 2010 and recipes submitted on and after 2010
 Question: does my model perform differently for recipes submitted before 2010 and recipes submitted on and after 2010?
 Null Hypothesis: Our model is fair. Its performance for recipes submitted before and after 2010 is roughly the same, and any differences are due to random chance.

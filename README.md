@@ -46,7 +46,7 @@ We noticed that `'sugar (PDV)'` and `'saturated fat (PDV)'` have particularly la
 - Our final model use ColumnTransformer descriped above and KNeighborsRegressor with the best combination of hyperparameters
 - Performance: Our final model consistently scores over 0.9 R^2 in the test dataset, which is a huge improvement over the baseline model’s 0.5 R^2.
 
-<iframe src="assets/testscore.html" width=800 height=600 frameBorder=0></iframe>
+<iframe src="assets/testscore.html" width=700 height=400 frameBorder=0></iframe>
 ---
 
 ## Fairness Analysis

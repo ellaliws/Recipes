@@ -46,7 +46,7 @@ We noticed that `'sugar (PDV)'` and `'saturated fat (PDV)'` have particularly la
 - Our final model use ColumnTransformer descriped above and KNeighborsRegressor with the best combination of hyperparameters
 - Performance: Our final model consistently scores over 0.9 R^2 in the test dataset, which is a huge improvement over the baseline model’s 0.5 R^2.
 - we visualize the density distribution of predicted values and true values of calories
-<iframe src="assets/density.html" width=600 height=400 frameBorder=0></iframe>
+<iframe src="assets/density.html" width=620 height=400 frameBorder=0></iframe>
 ---
 
 ## Fairness Analysis
@@ -67,3 +67,5 @@ We repeatedly shuffle the test data and obtain a list of differences in R^2 betw
 - Calculate the **p-value** by comparing the list to our observed value.
 We got a large p-value of 0.5, which is greater than our significance level. We fail to reject the null hypothesis. 
 - Hence, we conclude that it seems like our model is fair.
+- Visualization of permutation test
+<iframe src="assets/hist1.html" width=620 height=400 frameBorder=0></iframe>

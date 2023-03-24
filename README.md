@@ -36,7 +36,8 @@ After train test split, our mode consistently scores around 0.5 R^2
 
 ## Final Model
 - Model Description: we used a ColumnTransformer(to Normalize `'sugar (PDV)'` and `'saturated fat (PDV)'`, and to standardize `'carbohydrates (PDV)'`, `'total fat (PDV)'`, `'protein (PDV)'`) and use KNeighborsRegressor
-With a low R^2 score for test set, we think our model needs more complexity. It was clear more features were needed for a better model. After some research online, we realized that all nutrients listed are important when it comes to calculating calories, besides Sodium, which has no calories at all. Therefore, we ended up including five features: total fat (PDV), sugar (PDV), protein (PDV), saturated fat (PDV), and carbohydrates (PDV).
+- With a low R^2 score for test set, we think our model needs more complexity. It was clear more features were needed for a better model. 
+- After some research online, we realized that all nutrients listed are important when it comes to calculating calories, besides Sodium, which has no calories at all. Therefore, we ended up including five features: total fat (PDV), sugar (PDV), protein (PDV), saturated fat (PDV), and carbohydrates (PDV).
 We noticed that `'sugar (PDV)'` and `'saturated fat (PDV)'` have particularly large outliers and relatively large IQR. We decided to perform normalization with these two features because we worry that the extreme outliers and variability can influence standardization in a negative way. 
 - For the other three features, `'carbohydrates (PDV)'`,`'total fat (PDV)'`, `'protein (PDV)'`, we employ standardization. This is because in data generating process: 
   1. We do not see extreme outliers in these three features

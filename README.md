@@ -42,8 +42,7 @@ We noticed that `'sugar (PDV)'` and `'saturated fat (PDV)'` have particularly la
   1. We do not see extreme outliers in these three features
   2. By observing the relatively large difference in ranges for these three features, we want to prevent features with wider ranges   from dominating our metric
 - We use gridsearchcv to find the best hyperparameter. The best n_neighbor is 2 and the best weight is distance rather than uniform.
-- Final model description: 
-- Our final model use ColumnTransformer descriped above and KNeighborsRegressor with the best combination of hyperparameters
+- Final model description: Our final model use ColumnTransformer descriped above and KNeighborsRegressor with the best combination of hyperparameters(n_neighbor is 2, weight is distance)
 - Performance: Our final model consistently scores over 0.9 R^2 in the test dataset, which is a huge improvement over the baseline model’s 0.5 R^2.
 - we visualize the density distribution of predicted values and true values of calories
 <iframe src="assets/density1.html" width=620 height=400 frameBorder=0></iframe>
